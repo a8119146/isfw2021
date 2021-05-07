@@ -10,31 +10,61 @@
     <script type="text/javascript" src="osql.js"></script>
 
     <script>
-        function button1Pressed() {
+        var timer;
+        timer = setInterval(tick,2000)
+
+        function tick(){
             execSelect();
         }
+        
+
 
         async function execSelect() {
             var sql = 'select * from Tweets order by time desc limit 20';
             var objects = await osql.connect(sql);
             console.log(objects);
             var html = '';
-            html = html + '<ul>';
             for (var i = 0; i < objects.length; i++) {
                 var object = objects[i];
-                html = html + '<li>' + object.tweet + '</li>';
+                html = html + '<table width = "500px" border = "1">';
+                html = html + '<tr>';
+                html = html + '<td width = 100px>' + object.name + '</td>';
+                html = html + '<td width = 100px>' + object.tweet + '</td>';
+                html = html + '<td width = 100px>' + object.time + '</td>';
+                html = html + '</tr>'
+
             }
-            html = html + '</ul>';
             document.getElementById('result').innerHTML = html;
+        }
+
+        function button1Pressed() {
+            execSelect2();
+        }
+
+        async function execSelect2() {
+            var userid = document.getElementById('tf1').value;
+            var tweet = document.getElementById('tf2').value;
+
+            var sql = 'insert into Tweets (name, tweet, time) values("%USERID%", "%TWEET%", now());';
+            sql = sql.replace("%USERID%", userid);
+            sql = sql.replace("%TWEET%", tweet);
+            console.log(sql);
+            var objects = await osql.connect(sql);
+            console.log(objects);
         }
     </script>
 
 </head>
 
 <body>
-    <h1>Tweets</h1>
-    <button onclick="button1Pressed()">X</button>
+    <h1>Tweets moe'sversion</h1>
+    
     <hr>
+    ログイン名:<input id="tf1" value="名無し" type="textfield">
+    <br>
+    tweet:<input id="tf2" type="textfield">
+    <button onclick="button1Pressed()">tweet</button>
+    <br>
     <p id="result">xxxx</p>
 </body>
 
