@@ -14,10 +14,6 @@
             doInsert();
         }
 
-        function button2Pressed() {
-            doSelect();
-        }
-
         async function doInsert() {
             var userid = document.getElementById('tf1').value;
             var tweet = document.getElementById('tf2').value;
@@ -31,7 +27,9 @@
         }
 
         $().ready(function () {
-            doSelect()
+            var timer;
+            timer = setInterval(doSelect, 2000)
+            document.getElementById('tf2').value = '';
         });
         async function doSelect() {
             var sql = 'select * from Tweets order by time desc limit 20';
@@ -49,7 +47,6 @@
 
             }
             document.getElementById('result').innerHTML = html;
-            document.getElementById('tf2').value = '';
         }
     </script>
 
