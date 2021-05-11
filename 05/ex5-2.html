@@ -30,6 +30,9 @@
             document.getElementById('tf2').value = " ";
         }
 
+        $().ready(function () {
+            doSelect();
+        });
         async function doSelect() {
             var sql = 'select * from Tweets order by time desc limit 20';
             var objects = await osql.connect(sql);
@@ -60,10 +63,6 @@
     <button onclick="button1Pressed()">tweet</button>
     <br>
     <p id="result"></p>
-
-    <button onclick="button2Pressed()">X</button>
-    <hr>
-    <p id="result">xxxx</p>
 </body>
 
 </html>
