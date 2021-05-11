@@ -31,7 +31,7 @@
         }
 
         $().ready(function () {
-            doSelect();
+            doSelect()
         });
         async function doSelect() {
             var sql = 'select * from Tweets order by time desc limit 20';
@@ -49,6 +49,7 @@
 
             }
             document.getElementById('result').innerHTML = html;
+            document.getElementById('tf2').value = '';
         }
     </script>
 
@@ -63,6 +64,8 @@
     <button onclick="button1Pressed()">tweet</button>
     <br>
     <p id="result"></p>
+
+
 </body>
 
 </html>
