@@ -15,16 +15,20 @@
         }
 
         async function doSelect() {
-            var sql = "select * from Tweets WHERE Tweet LIKE 'できました'";
+            var sql = 'select * from Tweets order by time desc limit 20';
             var objects = await osql.connect(sql);
             console.log(objects);
             var html = '';
-            html = html + '<ul>';
             for (var i = 0; i < objects.length; i++) {
                 var object = objects[i];
-                html = html + '<li>' + object.id + ',' + object.name + '+' + object.time + ',' + object.tweet + '</li>';
+                html = html + '<table width = "500px" border = "1">';
+                html = html + '<tr>';
+                html = html + '<td width = 100px>' + object.name + '</td>';
+                html = html + '<td width = 100px>' + object.tweet + '</td>';
+                html = html + '<td width = 100px>' + object.time + '</td>';
+                html = html + '</tr>'
+
             }
-            html = html + '</ul>';
             document.getElementById('result').innerHTML = html;
         }
     </script>
