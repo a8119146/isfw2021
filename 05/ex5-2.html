@@ -14,6 +14,10 @@
             doInsert();
         }
 
+        function button2Pressed() {
+            doSelect();
+        }
+
         async function doInsert() {
             var userid = document.getElementById('tf1').value;
             var tweet = document.getElementById('tf2').value;
@@ -24,6 +28,24 @@
 
             document.getElementById('result').innerHTML = "tweetしました";
             document.getElementById('tf2').value = " ";
+        }
+
+        async function doSelect() {
+            var sql = 'select * from Tweets order by time desc limit 20';
+            var objects = await osql.connect(sql);
+            console.log(objects);
+            var html = '';
+            for (var i = 0; i < objects.length; i++) {
+                var object = objects[i];
+                html = html + '<table width = "500px" border = "1">';
+                html = html + '<tr>';
+                html = html + '<td width = 100px>' + object.name + '</td>';
+                html = html + '<td width = 100px>' + object.tweet + '</td>';
+                html = html + '<td width = 100px>' + object.time + '</td>';
+                html = html + '</tr>'
+
+            }
+            document.getElementById('result').innerHTML = html;
         }
     </script>
 
@@ -38,6 +60,10 @@
     <button onclick="button1Pressed()">tweet</button>
     <br>
     <p id="result"></p>
+
+    <button onclick="button2Pressed()">X</button>
+    <hr>
+    <p id="result">xxxx</p>
 </body>
 
 </html>
