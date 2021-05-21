@@ -10,14 +10,35 @@
     <script type="text/javascript" src="../osql.js"></script>
 
     <script>
+
+        $().ready(function () {
+            var name = sessionStorage.getItem('username');
+            document.getElementById('welcome').innerHTML = 'ようこそ' + name + 'さん';
+        });
+
+        async function buttonPressed() {
+            var id = sessionStorage.getItem('userid');
+
+            location.href = 'update.html?userid=' + id;
+        }
+
+        async function tweet() {
+            location.href = "ex6-5.html";
+            sessionStorage.setItem('username', objects[0].name);
+        }
+
+
+
     </script>
 
 </head>
 
 <body>
     <h1>ユーザトップ</h1>
-    <p id="welcome">ようこそxxさん</p>
+    <p id="welcome"></p>
     <hr>
+    <button onclick="buttonPressed()">変更</button>
+    <button onclick="tweet()">ツイートページへ</button>
 
 </body>
 
